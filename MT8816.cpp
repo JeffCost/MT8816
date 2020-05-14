@@ -31,7 +31,9 @@ MT8816::MT8816(int pin_reset, int pin_strobe, int pin_data,
 void MT8816::setState(uint8_t x, uint8_t y, bool state)
 {
     states[x][y] = state;
-    if(x >= 6) x+= 2;
+    if(x == 12) { x = 6; }
+    else if(x == 13) { x = 7; }
+    else if (x>=6 && x<=13) { x+=2; } 
     if(bitRead(x, 0)) digitalWrite(_pin_ax0, HIGH);
     if(bitRead(x, 1)) digitalWrite(_pin_ax1, HIGH);
     if(bitRead(x, 2)) digitalWrite(_pin_ax2, HIGH);
